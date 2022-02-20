@@ -4,7 +4,11 @@ let clear = document.querySelector(".ac");
 let negative = document.querySelector(".pm");
 let percentage = document.querySelector(".percent");
 let operators = document.querySelectorAll(".operator");
-let operatorler = document.getElementsByClassName("operator");
+let equalize = document.querySelector(".equal");
+let firstOperand = "";
+let secondOperand = "";
+let total = 0;
+let finalTotal = 0;
 
 buttonNumber.forEach(item => {
 
@@ -12,24 +16,20 @@ buttonNumber.forEach(item => {
 
         if ((resultScreen.innerHTML == "0") && (e.target.innerHTML == "0")) {
             resultScreen.innerHTML += "";
-        } 
-        
-        else if ((resultScreen.innerHTML.length != 0) && ((typeof resultScreen.innerHTML) === "number")) {
+        } else if ((resultScreen.innerHTML.length != 0) && ((typeof firstOperand) === "number")) {
 
-            // let operand = resultScreen.innerHTML;
-            console.log(resultScreen.innerHTML);
-            resultScreen.innerHTML = "";
-            resultScreen.innerHTML += e.target.innerHTML;
+            secondOperand += e.target.innerHTML;
+            secondOperand = Number(secondOperand);
+            resultScreen.innerHTML = secondOperand;
 
 
-        } else if ((resultScreen.innerHTML.length != 0) && (e.target.innerHTML != "0")) {
+        } else if ((resultScreen.innerHTML.length != 0)) {
 
             if (resultScreen.innerHTML[0] == "0") resultScreen.innerHTML = "";
 
             resultScreen.innerHTML += e.target.innerHTML;
+
         }
-
-
 
     });
 
@@ -38,11 +38,14 @@ buttonNumber.forEach(item => {
 clear.addEventListener("click", () => {
 
     resultScreen.innerHTML = "0";
-    operators.forEach(item => {
-        item.style.backgroundColor = "#f1a33c";
-        item.style.color = "white";
+    firstOperand = "";
+    secondOperand = "";
+    total = 0;
+    // operators.forEach(item => {
+    //     item.style.backgroundColor = "#f1a33c";
+    //     item.style.color = "white";
 
-    });
+    // });
 
 });
 
@@ -69,61 +72,36 @@ percentage.addEventListener("click", () => {
 
 });
 
+
 operators.forEach(function (item) {
 
     item.addEventListener("click", (e) => {
 
-        if (item.className == "button operator plus") {
+        let compute = e.target.innerHTML;
 
-            if (e.target.style.backgroundColor = "#f1a33c") {
-
-                e.target.style.backgroundColor = "white";
-                e.target.style.color = "#f1a33c";
-
-            } else if (e.target.style.backgroundColor = "white") {
-
-                e.target.style.backgroundColor = "#f1a33c";
-                e.target.style.color = "white";
-
-            }
-
-            let operand= Number(resultScreen.innerHTML);
-            resultScreen.innerHTML = operand;
-            console.log(typeof operand);
+        switch (compute) {
 
 
+            case "+":
 
-            // -----------------------------
+                if ((resultScreen.innerHTML !== "") && (typeof firstOperand === "number") && (typeof secondOperand === "number")) {
+
+                    total = firstOperand + secondOperand;
+                    resultScreen.innerHTML = total;
+                    firstOperand = total;
+                    secondOperand = 0;
+
+                } else if (resultScreen.innerHTML !== "") {
+
+                    firstOperand = Number(resultScreen.innerHTML);
+                }
 
 
 
+                case "=":
 
-
-
-
-
-
-        } else if (item.className == "button operator minus") {
-
-            if (e.target.style.backgroundColor = "#f1a33c") {
-
-                e.target.style.backgroundColor = "white";
-                e.target.style.color = "#f1a33c";
-
-            } else if (e.target.style.backgroundColor = "white") {
-
-                e.target.style.backgroundColor = "#f1a33c";
-                e.target.style.color = "white";
-
-            }
+                    total = firstOperand + secondOperand;
+                    resultScreen.innerHTML = total;
         }
-
-
-
-
     })
-})
-
-// let x = 21;
-
-// console.log((typeof x) == "number");
+});
