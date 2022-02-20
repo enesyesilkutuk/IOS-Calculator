@@ -5,10 +5,33 @@ let negative = document.querySelector(".pm");
 let percentage = document.querySelector(".percent");
 let operators = document.querySelectorAll(".operator");
 let equalize = document.querySelector(".equal");
+let point = document.querySelector(".decimal");
 let firstOperand = "";
 let secondOperand = "";
 let total = 0;
-let finalTotal = 0;
+let symbol;
+
+equalize.addEventListener("click", () => {
+
+    secondOperand = Number(resultScreen.innerHTML);
+
+    if (symbol == "+") {
+
+        resultScreen.innerHTML = firstOperand + secondOperand;
+        firstOperand = Number(resultScreen.innerHTML);
+        secondOperand = "" ;
+
+    } else if (symbol == "-") {
+
+        resultScreen.innerHTML = firstOperand - secondOperand;
+    } else if (symbol == "*") {
+
+        resultScreen.innerHTML = firstOperand * secondOperand;
+    } else if (symbol == "/") {
+
+        resultScreen.innerHTML = firstOperand / secondOperand;
+    }
+});
 
 buttonNumber.forEach(item => {
 
@@ -41,11 +64,12 @@ clear.addEventListener("click", () => {
     firstOperand = "";
     secondOperand = "";
     total = 0;
-    // operators.forEach(item => {
-    //     item.style.backgroundColor = "#f1a33c";
-    //     item.style.color = "white";
+});
 
-    // });
+point.addEventListener("click", () => {
+
+    if (resultScreen.innerHTML.includes(".")) resultScreen.innerHTML += "";
+    else if (resultScreen.innerHTML != "") resultScreen.innerHTML += "." ;
 
 });
 
@@ -72,36 +96,93 @@ percentage.addEventListener("click", () => {
 
 });
 
-
 operators.forEach(function (item) {
 
     item.addEventListener("click", (e) => {
 
-        let compute = e.target.innerHTML;
+            let compute = e.target.innerHTML;
 
-        switch (compute) {
+            switch (compute) {
 
+                case "+":
 
-            case "+":
+                    symbol = "+";
 
-                if ((resultScreen.innerHTML !== "") && (typeof firstOperand === "number") && (typeof secondOperand === "number")) {
+                    if ((resultScreen.innerHTML !== "") && (typeof firstOperand === "number") && (typeof secondOperand === "number")) {
 
-                    total = firstOperand + secondOperand;
-                    resultScreen.innerHTML = total;
-                    firstOperand = total;
-                    secondOperand = 0;
+                        total = firstOperand + secondOperand;
+                        resultScreen.innerHTML = total;
+                        firstOperand = total;
+                        secondOperand = 0;
 
-                } else if (resultScreen.innerHTML !== "") {
+                    } else if (resultScreen.innerHTML !== "") {
 
-                    firstOperand = Number(resultScreen.innerHTML);
-                }
+                        firstOperand = Number(resultScreen.innerHTML);
+                    }
 
+                    break;
 
+                case "-":
+
+                    symbol = "-";
+
+                    if ((resultScreen.innerHTML !== "") && (typeof firstOperand === "number") && (typeof secondOperand === "number")) {
+
+                        total = firstOperand - secondOperand;
+                        resultScreen.innerHTML = total;
+                        firstOperand = total;
+                        secondOperand = 0;
+
+                    } else if (resultScreen.innerHTML !== "") {
+
+                        firstOperand = Number(resultScreen.innerHTML);
+                    }
+
+                    break;
+
+                case "x":
+
+                    symbol = "*";
+
+                    if ((resultScreen.innerHTML !== "") && (typeof firstOperand === "number") && (typeof secondOperand === "number")) {
+
+                        total = firstOperand * secondOperand;
+                        resultScreen.innerHTML = total;
+                        firstOperand = total;
+                        secondOperand = 0;
+
+                    } else if (resultScreen.innerHTML !== "") {
+
+                        firstOperand = Number(resultScreen.innerHTML);
+                    
+                    }
+
+                    break;
+
+                case "÷":
+
+                    symbol = "/";
+
+                    if ((resultScreen.innerHTML !== "") && (typeof firstOperand === "number") && (typeof secondOperand === "number")) {
+
+                        total = firstOperand / secondOperand;
+                        resultScreen.innerHTML = total;
+                        firstOperand = total;
+                        secondOperand = 0;
+
+                    } else if (resultScreen.innerHTML !== "") {
+
+                        firstOperand = Number(resultScreen.innerHTML);
+                    }
+
+                    break;
 
                 case "=":
 
-                    total = firstOperand + secondOperand;
-                    resultScreen.innerHTML = total;
+                    secondOperand = resultScreen.innerHTML;
+
+            }
         }
-    })
+
+    );
 });
