@@ -13,23 +13,29 @@ let symbol;
 
 equalize.addEventListener("click", () => {
 
-    secondOperand = Number(resultScreen.innerHTML);
-
     if (symbol == "+") {
 
         resultScreen.innerHTML = firstOperand + secondOperand;
         firstOperand = Number(resultScreen.innerHTML);
-        secondOperand = "" ;
+        secondOperand = "";
 
     } else if (symbol == "-") {
 
         resultScreen.innerHTML = firstOperand - secondOperand;
+        firstOperand = Number(resultScreen.innerHTML);
+        secondOperand = "";
+
     } else if (symbol == "*") {
 
         resultScreen.innerHTML = firstOperand * secondOperand;
+        firstOperand = Number(resultScreen.innerHTML);
+        secondOperand = "";
+
     } else if (symbol == "/") {
 
         resultScreen.innerHTML = firstOperand / secondOperand;
+        firstOperand = Number(resultScreen.innerHTML);
+        secondOperand = "";
     }
 });
 
@@ -39,11 +45,16 @@ buttonNumber.forEach(item => {
 
         if ((resultScreen.innerHTML == "0") && (e.target.innerHTML == "0")) {
             resultScreen.innerHTML += "";
+
         } else if ((resultScreen.innerHTML.length != 0) && ((typeof firstOperand) === "number")) {
 
+            console.log(firstOperand);
+            // secondOperand = "";   // Bu satırı aktif edince eşittire tıkladıktan sonra sayı eğer tek basamaklı ise topluyur ama ikinci basamağı almıyor.
+            // resultScreen.innerHTML = "";
             secondOperand += e.target.innerHTML;
             secondOperand = Number(secondOperand);
             resultScreen.innerHTML = secondOperand;
+            console.log(secondOperand);
 
 
         } else if ((resultScreen.innerHTML.length != 0)) {
@@ -51,7 +62,6 @@ buttonNumber.forEach(item => {
             if (resultScreen.innerHTML[0] == "0") resultScreen.innerHTML = "";
 
             resultScreen.innerHTML += e.target.innerHTML;
-
         }
 
     });
@@ -69,7 +79,7 @@ clear.addEventListener("click", () => {
 point.addEventListener("click", () => {
 
     if (resultScreen.innerHTML.includes(".")) resultScreen.innerHTML += "";
-    else if (resultScreen.innerHTML != "") resultScreen.innerHTML += "." ;
+    else if (resultScreen.innerHTML != "") resultScreen.innerHTML += ".";
 
 });
 
@@ -113,7 +123,7 @@ operators.forEach(function (item) {
                         total = firstOperand + secondOperand;
                         resultScreen.innerHTML = total;
                         firstOperand = total;
-                        secondOperand = 0;
+                        secondOperand = "";
 
                     } else if (resultScreen.innerHTML !== "") {
 
@@ -131,7 +141,7 @@ operators.forEach(function (item) {
                         total = firstOperand - secondOperand;
                         resultScreen.innerHTML = total;
                         firstOperand = total;
-                        secondOperand = 0;
+                        secondOperand = "";
 
                     } else if (resultScreen.innerHTML !== "") {
 
@@ -149,12 +159,12 @@ operators.forEach(function (item) {
                         total = firstOperand * secondOperand;
                         resultScreen.innerHTML = total;
                         firstOperand = total;
-                        secondOperand = 0;
+                        secondOperand = "";
 
                     } else if (resultScreen.innerHTML !== "") {
 
                         firstOperand = Number(resultScreen.innerHTML);
-                    
+
                     }
 
                     break;
@@ -168,7 +178,7 @@ operators.forEach(function (item) {
                         total = firstOperand / secondOperand;
                         resultScreen.innerHTML = total;
                         firstOperand = total;
-                        secondOperand = 0;
+                        secondOperand = "";
 
                     } else if (resultScreen.innerHTML !== "") {
 
