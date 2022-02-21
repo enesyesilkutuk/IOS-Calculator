@@ -6,6 +6,8 @@ let percentage = document.querySelector(".percent");
 let operators = document.querySelectorAll(".operator");
 let equalize = document.querySelector(".equal");
 let point = document.querySelector(".decimal");
+let hour = document.querySelector('.hour');
+let minute = document.querySelector('.minute');
 let firstOperand = "";
 let secondOperand = "";
 let total = 0;
@@ -43,19 +45,21 @@ buttonNumber.forEach(item => {
 
     item.addEventListener("click", function (e) {
 
-        if ((resultScreen.innerHTML == "0") && (e.target.innerHTML == "0")) {
+        if (resultScreen.innerHTML == "-0") {
+
+            resultScreen.innerHTML = resultScreen.innerHTML.replace("0", e.target.innerHTML);
+
+        } else if ((resultScreen.innerHTML == "0") && (e.target.innerHTML == "0")) {
+            
             resultScreen.innerHTML += "";
 
         } else if ((resultScreen.innerHTML.length != 0) && ((typeof firstOperand) === "number")) {
 
             console.log(firstOperand);
-            // secondOperand = "";   // Bu satırı aktif edince eşittire tıkladıktan sonra sayı eğer tek basamaklı ise topluyur ama ikinci basamağı almıyor.
-            // resultScreen.innerHTML = "";
             secondOperand += e.target.innerHTML;
             secondOperand = Number(secondOperand);
             resultScreen.innerHTML = secondOperand;
             console.log(secondOperand);
-
 
         } else if ((resultScreen.innerHTML.length != 0)) {
 
@@ -190,9 +194,25 @@ operators.forEach(function (item) {
                 case "=":
 
                     secondOperand = resultScreen.innerHTML;
+                    firstOperand = secondOperand;
+                    secondOperand = "";
+                    
+                    break;
 
             }
         }
 
     );
 });
+
+const updateTime = () => {
+    const currentTime = new Date();
+  
+    let currentHour = currentTime.getHours();
+    let currentMinute = currentTime.getMinutes();
+
+    hour.textContent = currentHour.toString();
+    minute.textContent = currentMinute.toString().padStart(2, '0');
+}
+  setInterval(updateTime, 1000);
+  updateTime();
