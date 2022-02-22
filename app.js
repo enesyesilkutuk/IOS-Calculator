@@ -18,24 +18,36 @@ equalize.addEventListener("click", () => {
     if (symbol == "+") {
 
         resultScreen.innerHTML = firstOperand + secondOperand;
+        
+        if (resultScreen.innerHTML.toString().length > 9) resultScreen.innerHTML = resultScreen.innerHTML.toString().substring(0,9);
+        
         firstOperand = Number(resultScreen.innerHTML);
         secondOperand = "";
 
     } else if (symbol == "-") {
 
         resultScreen.innerHTML = firstOperand - secondOperand;
+
+        if (resultScreen.innerHTML.toString().length > 9) resultScreen.innerHTML = resultScreen.innerHTML.toString().substring(0,9);
+
         firstOperand = Number(resultScreen.innerHTML);
         secondOperand = "";
 
     } else if (symbol == "*") {
 
         resultScreen.innerHTML = firstOperand * secondOperand;
+
+        if (resultScreen.innerHTML.toString().length > 9) resultScreen.innerHTML = resultScreen.innerHTML.toString().substring(0,9);
+
         firstOperand = Number(resultScreen.innerHTML);
         secondOperand = "";
 
     } else if (symbol == "/") {
 
         resultScreen.innerHTML = firstOperand / secondOperand;
+
+        if (resultScreen.innerHTML.toString().length > 9) resultScreen.innerHTML = resultScreen.innerHTML.toString().substring(0,9);
+
         firstOperand = Number(resultScreen.innerHTML);
         secondOperand = "";
     }
@@ -55,11 +67,9 @@ buttonNumber.forEach(item => {
 
         } else if ((resultScreen.innerHTML.length != 0) && ((typeof firstOperand) === "number")) {
 
-            console.log(firstOperand);
             secondOperand += e.target.innerHTML;
             secondOperand = Number(secondOperand);
             resultScreen.innerHTML = secondOperand;
-            console.log(secondOperand);
 
         } else if ((resultScreen.innerHTML.length != 0)) {
 
